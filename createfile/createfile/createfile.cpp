@@ -6,7 +6,7 @@
 
 int _tmain(int argc, _TCHAR* argv[]) {
 
-	HANDLE hFile = CreateFile(L"C:\\temp.txt", GENERIC_WRITE, 0, NULL, CREATE_NEW, FILE_ATTRIBUTE_NORMAL, NULL);
+	HANDLE hFile = CreateFileA("C:\\Users\admin\Desktop\visual-studio-projects\temp.txt", GENERIC_WRITE, 0, NULL, CREATE_NEW, FILE_ATTRIBUTE_NORMAL, NULL);
 	if(hFile == INVALID_HANDLE_VALUE) {
 		printf("Unable to open file.");
 	}

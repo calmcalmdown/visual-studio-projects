@@ -1,0 +1,3 @@
+﻿  createfile.cpp
+c:\users\admin\desktop\visual-studio-projects\createfile\createfile\createfile.cpp(9): warning C4129: 'D': unrecognized character escape sequence
+  createfile.vcxproj -> C:\Users\admin\Desktop\visual-studio-projects\createfile\x64\Debug\createfile.exe
