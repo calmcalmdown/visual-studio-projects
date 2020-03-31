@@ -3,12 +3,12 @@
 #include <stdio.h>
 
 int _tmain(int argc, _TCHAR* argv[]) {
-    char* buffer = "C:\\drivers\\dllinject.dll";
+    char* buffer = "C:\\Users\\admin\\Desktop\\visual-studio-projects\\dllinject\\x64\\Debug\\dllinject.dll";
 
 	/*
 	 * Get process handle passing in the process ID.
 	 */
-	int procID = 3004;
+	int procID = 8556;
     HANDLE process = OpenProcess(PROCESS_ALL_ACCESS, FALSE, procID);
 	if(process == NULL) {
 		printf("Error: the specified process couldn't be found.\n");
@@ -17,7 +17,7 @@ int _tmain(int argc, _TCHAR* argv[]) {
 	/*
 	 * Get address of the LoadLibrary function.
 	 */
-    LPVOID addr = (LPVOID)GetProcAddress(GetModuleHandle(L"kernel32.dll"), "LoadLibraryA");
+    LPVOID addr = (LPVOID)GetProcAddress(GetModuleHandleA("kernel32.dll"), "LoadLibraryA");
 	if(addr == NULL) {
 		printf("Error: the LoadLibraryA function was not found inside kernel32.dll library.\n");
 	}
