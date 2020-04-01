@@ -8,7 +8,8 @@ INT APIENTRY DllMain(HMODULE hDLL, DWORD Reason, LPVOID Reserved) {
     FILE *file;
     fopen_s(&file, "C:\\temp.txt", "a+");
 
-    switch(Reason) {
+    switch(Reason) 
+	S{
     case DLL_PROCESS_ATTACH:
                 fprintf(file, "DLL attach function called.\n");
         break;

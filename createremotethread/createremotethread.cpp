@@ -2,7 +2,8 @@
 #include <Windows.h>
 #include <stdio.h>
 
-int _tmain(int argc, _TCHAR* argv[]) {
+int _tmain(int argc, _TCHAR* argv[]) 
+{
     char* buffer = "C:\\Users\\admin\\Desktop\\visual-studio-projects\\dllinject\\x64\\Debug\\dllinject.dll";
 
 	/*
@@ -10,7 +11,8 @@ int _tmain(int argc, _TCHAR* argv[]) {
 	 */
 	int procID = 8556;
     HANDLE process = OpenProcess(PROCESS_ALL_ACCESS, FALSE, procID);
-	if(process == NULL) {
+	if(process == NULL) 
+	{
 		printf("Error: the specified process couldn't be found.\n");
 	}
 
@@ -18,7 +20,8 @@ int _tmain(int argc, _TCHAR* argv[]) {
 	 * Get address of the LoadLibrary function.
 	 */
     LPVOID addr = (LPVOID)GetProcAddress(GetModuleHandleA("kernel32.dll"), "LoadLibraryA");
-	if(addr == NULL) {
+	if(addr == NULL) 
+	{
 		printf("Error: the LoadLibraryA function was not found inside kernel32.dll library.\n");
 	}
 
@@ -26,7 +29,8 @@ int _tmain(int argc, _TCHAR* argv[]) {
 	 * Allocate new memory region inside the process's address space.
 	 */
     LPVOID arg = (LPVOID)VirtualAllocEx(process, NULL, strlen(buffer), MEM_RESERVE | MEM_COMMIT, PAGE_READWRITE);
-	if(arg == NULL) {
+	if(arg == NULL) 
+	{
 		printf("Error: the memory could not be allocated inside the chosen process.\n");
 	}
 
@@ -34,7 +38,8 @@ int _tmain(int argc, _TCHAR* argv[]) {
 	 * Write the argument to LoadLibraryA to the process's newly allocated memory region.
 	 */
     int n = WriteProcessMemory(process, arg, buffer, strlen(buffer), NULL);
-	if(n == 0) {
+	if(n == 0) 
+	{
 		printf("Error: there was no bytes written to the process's address space.\n");
 	}
 
@@ -42,10 +47,12 @@ int _tmain(int argc, _TCHAR* argv[]) {
 	 * Inject our DLL into the process's address space.
 	 */
     HANDLE threadID = CreateRemoteThread(process, NULL, 0, (LPTHREAD_START_ROUTINE)addr, arg, NULL, NULL);
-	if(threadID == NULL) {
+	if(threadID == NULL) 
+	{
 		printf("Error: the remote thread could not be created.\n");
 	}
-	else {
+	else 
+	{
 		printf("Success: the remote thread was successfully created.\n");
 	}
 
